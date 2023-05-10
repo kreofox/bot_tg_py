@@ -88,7 +88,7 @@ async def send_message(message: types.Message):
 
         if type(commentText[message.text.split(" ")[0]]) == str:
             if message.text == '/start':
-                lastMsg = await message.answer("Рады приветсвовать вас в RATE-THIS tg BOT")
+                lastMsg = await message.answer("Рады приветсвовать вас в  tg BOT")
                 answer = User.checkLog("{0}".format(message.from_user.id))
                 if answer[1]:
                     btnSetting = Button.phoneBTN()
