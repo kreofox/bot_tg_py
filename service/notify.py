@@ -2,6 +2,7 @@ import schedule
 import time
 
 import modules.product as pr
+
 Product = pr.Product()
 def checkNot():
     schedule.every().day.at("08:59").do(Product.dayPush)

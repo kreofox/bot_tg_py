@@ -1,5 +1,5 @@
-import urllib.request as urllib2
-import urllib
+import urllib.request 
+import urllib.parse
 import base64
 
 
@@ -14,12 +14,12 @@ class RestApi:
 
     def __sendRequest(self, uri, params=None):
         url = self.__getUrl(uri, params)
-        request = urllib2.Request(url)
-        passman = urllib2.HTTPPasswordMgrWithDefaultRealm()
+        request = urllib.request.Request(url)
+        passman = urllib.request.HTTPPasswordMgrWithDefaultRealm()
         passman.add_password(None, url, self.login, self.password)
-        authhandler = urllib2.HTTPBasicAuthHandler(passman)
+        authhandler = urllib.request.HTTPBasicAuthHandler(passman)
 
-        opener = urllib2.build_opener(authhandler)
+        opener = urllib.request.build_opener(authhandler)
         data = opener.open(request).read()
         return data
 
@@ -27,7 +27,7 @@ class RestApi:
     def __getUrl(self, uri, params=None):
         url = "http://%s/messages/v2/%s/" % (self.getHost(), uri)
         paramStr = ''
-        localList = params.copy()
+        localList = { } if params is None else params.copy()
         if params is not None:
             for k, v in params.items():
                 if v is None:
@@ -47,7 +47,7 @@ class RestApi:
              statusQueueName=None, scheduleTime=None, wapurl=None):
         """Sending sms """
         params = {'phone': phone,
-                  'text': 'RATE-THIS code: {0}'.format(text),
+                  'text': 'RATE-THIS code: {}'.format(text),
                   'sender': sender,
                   'statusQueueName': statusQueueName,
                   'scheduleTime': scheduleTime,

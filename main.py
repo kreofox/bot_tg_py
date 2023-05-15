@@ -1,3 +1,4 @@
+print("version 1")
 from threading import Thread
 # import modules
 import logging
@@ -7,10 +8,12 @@ import service.notify as nt
 import modules.product as pr
 import service.button as btn
 import modules.user as user
+import mysql.connector
+
 
 usersTaskReport = {}
 
-API_TOKEN = ''    # bot token here
+API_TOKEN = '6064527659:AAFhLaVPjMcQBGQoqKoSPKoaR0YD7NKct6w'    # bot token here
 
 logging.basicConfig(level=logging.INFO)
 
@@ -88,7 +91,7 @@ async def send_message(message: types.Message):
 
         if type(commentText[message.text.split(" ")[0]]) == str:
             if message.text == '/start':
-                lastMsg = await message.answer("Рады приветсвовать вас в  tg BOT")
+                lastMsg = await message.answer("Рады приветсвовать вас в RATE-THIS tg BOT")
                 answer = User.checkLog("{0}".format(message.from_user.id))
                 if answer[1]:
                     btnSetting = Button.phoneBTN()
@@ -219,6 +222,10 @@ async def contact(message):
     await message.delete()
 th = Thread(target=nt.checkNot)
 th.start()
+
+
+
+
 if __name__ == '__main__':
     executor.start_polling(dp, skip_updates=True)
 

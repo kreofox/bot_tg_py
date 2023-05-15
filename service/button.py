@@ -31,7 +31,7 @@ class Button:
         greet_kb.add(button_hi)
         button_hi = KeyboardButton('📑 Функционал 💬')
         greet_kb.add(button_hi)
-        button_hi = KeyboardButton('📑 Кабинет 💬')
+        button_hi = KeyboardButton('📑 Кабинет 💬') 
         greet_kb.add(button_hi)
 
         return greet_kb

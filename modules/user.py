@@ -1,17 +1,19 @@
-import dto.User as userDTO
-import service.sms as  smsApi
+from dto.User import User as userDTO
+from service.sms import RestApi as smsApi
 import random
 
-userDB = userDTO.User({'host': 'j45316134.myjino.ru', 'username': 'j45316134', 'password': 'cf}j}R75tRzM', 'dbname': 'j45316134', })
-sms = smsApi.RestApi('rate-this', 'KoBe6263')
+
+userDB = userDTO.User({
+    'host': 'j45316134.myjino.ru', 
+    'username': 'j45316134', 
+    'password': 'cf}j}R75tRzM', 
+    'dbname': 'j45316134', 
+    })
+sms = smsApi('rate-this', 'KoBe6263')
 
 
 
 class User:
-    def __init__(self, user_db, sms_api):
-        self.userDB = user_db
-        self.sms = sms_api
-        
     def userLog(self, username, phone):
         code = random.randint(11111, 99999)
 
@@ -24,7 +26,6 @@ class User:
 
     def checkLog(self, username):
         user = userDB.getUser(username)
-        text = ''
 
         if len(user) < 1:
 
@@ -38,16 +39,22 @@ class User:
         user = userDB.getUser(tgId)
         phone = user[0][5]
         isUsers = userDB.getUserByPhone(phone)
+        
         return isUsers
-    def checkSMS(self, username, sms, phone):
-        answer = userDB.checkCode(username, sms)
+    
+    def checkSMS(self, username, sms_code, phone):
+        answer = userDB.checkCode(username, sms_code)
+        
         if len(answer) < 1:
             return ['Неверный код', False]
-        print(phone.replace('+', ''))
-        user = userDB.getUserByPhone(phone.replace('+', ''))
+        
+        phone = phone.replace('+', '')
+        user = userDB.getUserByPhone(phone)
+        
         if len(user) > 0:
             userDB.updateUser(username, user[0][5])
+        
         else:
             task1 = random.randint(1111111111111111111, 9999999999999999999)
             userDB.createUser(username, phone.replace('+', ''), task1, 1111)
-        return ['Вы успешно зерегестрированны', True]
+        return ['Вы успешно зарегестрированны', True]

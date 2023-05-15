@@ -1,7 +1,5 @@
 import mysql.connector
 import datetime
-
-
 class Product:
     def __init__(self, connectOption):
         self.db = mysql.connector.connect(
@@ -46,7 +44,7 @@ class Product:
             sqlScript = "SELECT COUNT(*) AS count, article FROM client  WHERE task1 = '{0}' AND status IN({1}) AND date_otziv = '{2}'".format(
                 task1, status, date)
         else:
-            sqlScript = "SELECT COUNT(*) AS count, article FROM client t  WHERE task1 = {0} AND t.type = 'отзыв'  AND status IN({1}) AND date_otziv IS NOT NULL GROUP BY article".format(
+            sqlScript = "SELECT COUNT(*) AS count, article FROM client t  WHERE task1 = {0} AND t.type = 'отзыв'  AND status IN({1}) GROUP BY article".format(
                 task1, status)
 
         cursor = self.db.cursor()
@@ -164,5 +162,3 @@ class Product:
         answer = cursor.fetchall()
         print(answer)
         return answer
-
-        
