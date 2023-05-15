@@ -13,7 +13,7 @@ import mysql.connector
 
 usersTaskReport = {}
 
-API_TOKEN = '6064527659:AAFhLaVPjMcQBGQoqKoSPKoaR0YD7NKct6w'    # bot token here
+API_TOKEN = ''    # bot token here
 
 logging.basicConfig(level=logging.INFO)
 
